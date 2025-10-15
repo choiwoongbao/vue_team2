@@ -1,0 +1,103 @@
+/* =========================================================
+🎨 Design Tokens for SCSS (Typography + Spacing)
+========================================================= */
+
+/* ========== 🎁 FONT ========== */
+// 이벤트 (Event)
+$event-big-font-size: 45px;
+$event-big-font-weight: 700; // Bold
+
+$event-middle-font-size: 36px;
+$event-middle-font-weight: 600; // SemiBold
+
+$event-emphasis-font-size: 28px;
+$event-emphasis-font-weight: 500; // Medium
+
+$event-small-font-size: 18px;
+$event-small-font-weight: 400; // Regular
+
+
+// 본문 (Main)
+$main-xbig-font-size: 32px;
+$main-xbig-font-weight: 650; // SemiBold
+
+$main-big-font-size: 24px;
+$main-big-font-weight: 600; // SemiBold
+
+$main-emphasis-font-size: 20px;
+$main-emphasis-font-weight: 500; // Medium
+
+$main-small-font-size: 16px;
+$main-small-font-weight: 400; // Regular
+
+
+// 보조 (Sub)
+$sub-big-font-size: 15px;
+$sub-big-font-weight: 500; // Medium
+
+$sub-small-font-size: 13px;
+$sub-small-font-weight: 400; // Regular
+
+
+// 인용문 (Quote)
+$quote-font-size: 20px;
+$quote-font-weight: 500; // Medium
+$quote-font-style: italic;
+
+
+// 숫자 (Number)
+$number-font-size: 22px;
+$number-font-weight: 700; // Bold
+$number-font-family: monospace;
+
+
+// 버튼 (Button)
+$button-font-size: 18px;
+$button-font-weight: 600; // SemiBold;
+
+
+// 라벨 (Label)
+$label-font-size: 14px;
+$label-font-weight: 600; // SemiBold;
+$label-text-transform: uppercase;
+
+
+// 코드 (Mono)
+$mono-font-size: 14px;
+$mono-font-weight: 400; // Regular;
+$mono-font-family: monospace;
+
+
+// 캡션 (Caption)
+$caption-font-size: 13px;
+$caption-font-weight: 500; // Medium;
+
+
+/* ========== 🧱 GAP (섹션 간 / 요소 간 간격) ========== */
+$event-big-gap-large: 7rem; // 110px
+$event-big-gap-small: 2rem; // 32px
+$event-small-gap-small: 1.5rem; // 24px
+$main-big-gap-large: 4.5rem; // 72px
+$main-big-gap-small: 1.5rem; // 24px
+$main-small-gap-small: 1.25rem; // 20px
+$sub-big-gap-large: 3.5rem; // 56px
+$sub-big-gap-small: 1.1rem; // 18px
+$sub-small-gap-small: 1rem; // 16px;
+
+
+/* ========== 📦 INNER (내부 여백) ========== */
+$event-big-inner: 1.5rem; // 24px
+$event-small-inner: 1.5rem; // 24px
+$main-big-inner: 1.4rem; // 22px
+$main-small-inner: 1.4rem; // 22px
+$sub-big-inner: 1.25rem; // 20px
+$sub-small-inner: 1.25rem; // 20px;
+
+
+/* ========== 🎁 PADDING (섹션 내부 패딩) ========== */
+$event-big-padding: 4rem; // 64px
+$event-small-padding: 4rem; // 64px
+$main-big-padding: 3rem; // 48px
+$main-small-padding: 3rem; // 48px
+$sub-big-padding: 2rem; // 32px
+$sub-small-padding: 2rem; // 32px;
