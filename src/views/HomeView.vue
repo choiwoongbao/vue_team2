@@ -6,10 +6,8 @@ import Info from "./mains/Info.vue";
 import QuickR from "./mains/QuickR.vue";
 import Serch from "./mains/Serch.vue";
 </script>
-
 <template>
   <div>home</div>
-
   <Banner />
   <QuickR />
   <About />
@@ -17,5 +15,4 @@ import Serch from "./mains/Serch.vue";
   <Info />
   <Faq />
 </template>
-
 <style scoped></style>
