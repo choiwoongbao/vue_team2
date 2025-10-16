@@ -1,37 +1,34 @@
 <template>
   <div class="search-main">
     <section class="branch-search" role="search" aria-label="짐보따리 지점 찾기">
-    <div class="inner">
-      <!-- ⬅️ 일러스트(이미지) 들어갈 자리 -->
-      <!--
+      <div class="inner">
+        <!-- ⬅️ 일러스트(이미지) 들어갈 자리 -->
+        <!--
         <img src="@/assets/your-illustration.png" alt="위치와 캐리어 일러스트" />
         권장 크기: 가로 220~260px
         위치: figure.illustration 안쪽
       -->
-      <figure class="illustration"><!-- 이미지 자리 --></figure>
+        <figure class="illustration"><!-- 이미지 자리 --></figure>
 
-      <div class="content">
-        <h1 class="title">짐보따리 지점 찾기</h1>
-        <p class="subtitle">
-          근처에 있는 짐보따리 보관소와 무인함 위치를 한눈에 확인할 수 있습니다.
-        </p>
+        <div class="content">
+          <h1 class="title">짐보따리 지점 찾기</h1>
+          <p class="subtitle">근처에 있는 짐보따리 보관소와 무인함 위치를 한눈에 확인할 수 있습니다.</p>
 
-        <form class="searchbar" action="#" method="get">
-          <label class="a11y" for="branchQuery">지점 검색</label>
-          <input
-            id="branchQuery"
-            type="search"
-            placeholder="도로명 주소를 입력해 주세요. (예: 강남대로 00)"
-            autocomplete="off"
-            inputmode="search"
-          />
-          <button class="cta" type="submit">가까운 지점 검색하기</button>
-        </form>
+          <form class="searchbar" action="#" method="get">
+            <label class="a11y" for="branchQuery">지점 검색</label>
+            <input
+              id="branchQuery"
+              type="search"
+              placeholder="도로명 주소를 입력해 주세요. (예: 강남대로 00)"
+              autocomplete="off"
+              inputmode="search"
+            />
+            <button class="cta" type="submit">가까운 지점 검색하기</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   </div>
-  
 </template>
 
 <style scoped>
@@ -40,7 +37,7 @@
   --mint-weak: #f4fbfb;
   --ink: #111111;
   --muted: #647074;
-  --ring: rgba(2,133,135,.26);
+  --ring: rgba(2, 133, 135, 0.26);
   --radius: 12px;
 
   background: #fff;
@@ -101,7 +98,7 @@
   padding: 10px;
   border-radius: calc(var(--radius) + 4px);
   border: 1px solid #f0f3f3;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   gap: 10px;
 }
 
@@ -113,7 +110,7 @@
   padding: 0 14px;
   font-size: 15px;
   outline: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .search-main .searchbar input::placeholder {
@@ -136,17 +133,25 @@
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  transition: transform .06s ease, opacity .15s ease;
+  transition: transform 0.06s ease, opacity 0.15s ease;
 }
-.search-main .cta:hover { opacity: .95; }
-.search-main .cta:active { transform: translateY(1px) scale(.99); }
+.search-main .cta:hover {
+  opacity: 0.95;
+}
+.search-main .cta:active {
+  transform: translateY(1px) scale(0.99);
+}
 
 /* 접근성용 라벨 숨김 */
 .search-main .a11y {
   position: absolute !important;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0; border: 0;
-  clip: rect(0 0 0 0); overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 /* ✅ 반응형 수정 버전 */
