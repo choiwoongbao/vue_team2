@@ -14,10 +14,4 @@ import Footer from "./components/Footer.vue";
 </template>
 
 <style scoped>
-.wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-}
 </style>
