@@ -9,6 +9,7 @@ import Login from "@/views/Login.vue";
 import Signup from "@/views/Signup.vue";
 import Promotion from "@/views/Promotion.vue";
 import Support from "@/views/Support.vue";
+import About from "@/views/mains/About.vue";
 const routes = [
   { path: "/", component: HomeView },
   { path: "/information", component: Information },
@@ -19,7 +20,8 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/signup", component: Signup },
   { path: "/promotion", component: Promotion},
-  { path: "/support", component: Support}
+  { path: "/support", component: Support},
+  { path: "/about", component: About}
 ];
 // 라우터 만들기 (길 안내 지도 같은 것)
 // createRouter() → "길을 만드는 도구"
