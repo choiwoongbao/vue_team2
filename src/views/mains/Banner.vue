@@ -13,13 +13,13 @@
         :loop="true"
       >
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner1" />
+          <img src="/public/images/mains/banner/mainbanner1.png" />
         </swiper-slide>
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner2" />
+          <img src="/public/images/mains/banner/mainbanner2.png" />
         </swiper-slide>
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner3" />
+          <img src="/public/images/mains/banner/mainbanner3.png"/>
         </swiper-slide>
       </swiper>
 

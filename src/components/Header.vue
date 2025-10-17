@@ -34,21 +34,18 @@
   </nav>
 
   <!-- 390 hamburger button -->
-
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped>
 .logo {
   width: 10%;
-  font-size: clamp(25px, 1vw, 30px);
+  font-size: clamp(30px, 3vw, 38px);
   font-weight: 600;
   color: #028587;
   white-space: nowrap;
-  padding-left: 5vw;
+  /* padding-left: 5vw; */
 }
 
 .menu {
@@ -82,23 +79,31 @@
 }
 
 nav {
+  position: relative;
+  z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: clamp(8px, 1vw, 20px);
   padding: 10px 5vw;
   border-bottom: 1px solid #e7e2e2;
+  line-height: 60px;
 }
 nav a {
-  color: white;
   text-decoration: none;
   padding: 5px 10px;
+  color: inherit;
 }
 nav a:hover {
   border-radius: 5px;
 }
+.dropdown {
+  position: relative;
+}
+
 .menu > .dropdown {
   position: relative;
+  z-index: 1;
 }
 .dropdown:hover .submenu {
   display: block;
@@ -113,6 +118,7 @@ nav a:hover {
   border-radius: 5px;
   min-width: 100px;
   background-color: #fff;
+  z-index: 10000;
 }
 .submenu li {
   padding: 10px;
@@ -125,7 +131,7 @@ nav a:hover {
   color: #028587;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .menu {
     gap: 10px;
   }
@@ -134,7 +140,5 @@ nav a:hover {
   }
 }
 @media (max-width: 390px) {
-
-
 }
 </style>
