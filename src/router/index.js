@@ -1,27 +1,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import Information from "@/views/Information.vue";
+import Information2 from "@/views/Information2.vue";
 import Reservation from "@/views/Reservation.vue";
-import Community from "@/views/Community.vue";
-import BookNow from "@/views/booking/BookNow.vue";
-import ChangeBooking from "@/views/booking/ChangeBooking.vue";
-import Login from "@/views/Login.vue";
-import Signup from "@/views/Signup.vue";
+import Reservation2 from "@/views/Reservation2.vue";
 import Promotion from "@/views/Promotion.vue";
+import Community from "@/views/Community.vue";
+import Community2 from "@/views/Community2.vue";
 import Support from "@/views/Support.vue";
-import About from "@/views/mains/About.vue";
+import Support2 from "@/views/Support2.vue";
+import Support3 from "@/views/Support3.vue";
+import Signup from "@/views/Signup.vue";
+import Login from "@/views/Login.vue";
 const routes = [
   { path: "/", component: HomeView },
   { path: "/information", component: Information },
+  { path: "/information2", component: Information2 },
+  { path: "/promotion", component: Promotion },
   { path: "/reservation", component: Reservation },
+  { path: "/reservation2", component: Reservation2 },
   { path: "/community", component: Community },
-  { path: "/booknow", component: BookNow },
-  { path: "/changebooking", component: ChangeBooking },
+  { path: "/community2", component: Community2 },
   { path: "/login", component: Login },
   { path: "/signup", component: Signup },
-  { path: "/promotion", component: Promotion},
-  { path: "/support", component: Support},
-  { path: "/about", component: About}
+  { path: "/support", component: Support },
+  { path: "/support2", component: Support2 },
+  { path: "/support3", component: Support3 },
 ];
 // 라우터 만들기 (길 안내 지도 같은 것)
 // createRouter() → "길을 만드는 도구"

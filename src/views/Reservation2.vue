@@ -4,7 +4,7 @@
 
 <template>
   <div >
-community1
+reservation2
   </div>
 </template>
 

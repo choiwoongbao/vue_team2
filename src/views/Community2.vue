@@ -4,7 +4,7 @@
 
 <template>
   <div >
-community1
+community2
   </div>
 </template>
 
