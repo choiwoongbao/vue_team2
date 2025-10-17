@@ -45,7 +45,7 @@
   font-weight: 600;
   color: #028587;
   white-space: nowrap;
-  /* padding-left: 5vw; */
+
 }
 
 .menu {
