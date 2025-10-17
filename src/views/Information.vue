@@ -4,7 +4,7 @@
 
 <template>
   <div >
-information
+information1
   </div>
 </template>
 

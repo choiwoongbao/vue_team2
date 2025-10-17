@@ -2,28 +2,34 @@
   <nav>
     <router-link to="/" class="logo">짐보따리</router-link>
     <div class="menu">
-      <router-link to="/information" class="dropdown"
+      <router-link class="dropdown"
         >이용안내
         <ul class="submenu">
-          <li><router-link to="/booknow">이용방법</router-link></li>
-          <li><router-link to="/changebooking">요금안내</router-link></li>
+          <li><router-link to="/information">이용방법</router-link></li>
+          <li><router-link to="/information2">요금안내</router-link></li>
         </ul>
       </router-link>
-      <router-link to="/promotion">예약하기</router-link>
-      <router-link to="/reservation">프로모션</router-link>
-      <router-link to="/community" class="dropdown"
+      <router-link class="dropdown"
+        >예약하기
+        <ul class="submenu">
+          <li><router-link to="/reservation">이용방법</router-link></li>
+          <li><router-link to="/reservation2">요금안내</router-link></li>
+        </ul>
+      </router-link>
+      <router-link to="/promotion">프로모션</router-link>
+      <router-link class="dropdown"
         >커뮤니티
         <ul class="submenu">
-          <li><router-link to="/booknow">자유게시판</router-link></li>
-          <li><router-link to="/changebooking">후기</router-link></li>
+          <li><router-link to="/community">자유게시판</router-link></li>
+          <li><router-link to="/community2">후기</router-link></li>
         </ul>
       </router-link>
-      <router-link to="/support" class="dropdown"
+      <router-link class="dropdown"
         >고객센터
         <ul class="submenu">
-          <li><router-link to="/booknow">자주하는 질문</router-link></li>
-          <li><router-link to="/changebooking">공지사항</router-link></li>
-          <li><router-link to="/booknow">문의하기</router-link></li>
+          <li><router-link to="/support">자주하는 질문</router-link></li>
+          <li><router-link to="/support2">공지사항</router-link></li>
+          <li><router-link to="/support3">문의하기</router-link></li>
         </ul>
       </router-link>
       <div class="login">
@@ -34,12 +40,9 @@
   </nav>
 
   <!-- 390 hamburger button -->
-
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped>
 .logo {
@@ -134,7 +137,5 @@ nav a:hover {
   }
 }
 @media (max-width: 390px) {
-
-
 }
 </style>

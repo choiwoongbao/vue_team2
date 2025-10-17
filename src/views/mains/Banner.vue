@@ -13,13 +13,16 @@
         :loop="true"
       >
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner1" />
+          <img src="/public/images/mains/banner/mainbanner1.png" alt="mainbanner1" />
         </swiper-slide>
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner2" />
+          <img src="/public/images/mains/banner/mainbanner1.png" alt="mainbanner2" />
         </swiper-slide>
         <swiper-slide>
-          <img src="/public/images/promotion/mainbanner1.png" alt="mainbanner3" />
+          <img src="/public/images/mains/banner/mainbanner1.png" alt="mainbanner3" />
+        </swiper-slide>
+        <swiper-slide>
+          <img src="/public/images/mains/banner/mainbanner4.png" alt="mainbanner4" />
         </swiper-slide>
       </swiper>
 
@@ -294,18 +297,14 @@ const Calendar = {
 </script>
 
 <style scoped>
-/* ============ 네임스페이스: .banner-main 하위로 한정 ============ */
 
-/* -------------------- 배너 기본 -------------------- */
 .banner-main .main-banner{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* ✅ 겹치기용 기준점 */
   position: relative;
-  background: #f3f3f3; /* 배너 배경 톤 (이미지 있을 때는 거의 안 보임) */
+  background: #f3f3f3; 
 }
 .banner-main .main-banner img{
   width: 100%;
@@ -318,7 +317,7 @@ const Calendar = {
 /* Swiper 네비게이션(네임스페이스 포함) */
 :deep(.banner-main .swiper-button-prev),
 :deep(.banner-main .swiper-button-next){
-  color: #b8b3b3;
+  color: #a3a3a3 !important;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -327,6 +326,8 @@ const Calendar = {
 }
 :deep(.banner-main .swiper-button-prev){ left: 4%; }
 :deep(.banner-main .swiper-button-next){ right: 4%; }
+
+
 
 /* -------------------- 겹치는 서치바 포지셔닝 -------------------- */
 .banner-main .search-dock{
