@@ -41,10 +41,11 @@
 <style scoped>
 .logo {
   width: 10%;
-  font-size: clamp(25px, 1vw, 30px);
+  font-size: clamp(30px, 3vw, 38px);
   font-weight: 600;
   color: #028587;
   white-space: nowrap;
+
 }
 
 .menu {
@@ -86,6 +87,7 @@ nav {
   gap: clamp(8px, 1vw, 20px);
   padding: 10px 5vw;
   border-bottom: 1px solid #e7e2e2;
+  line-height: 60px;
 }
 nav a {
   text-decoration: none;
