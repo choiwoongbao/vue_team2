@@ -7,7 +7,6 @@ import QuickR from "./mains/QuickR.vue";
 import Serch from "./mains/Serch.vue";
 </script>
 <template>
-  <div>home</div>
   <Banner />
   <QuickR />
   <About />
