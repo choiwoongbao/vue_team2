@@ -32,12 +32,12 @@
           </div>
         </div>
         <!-- 하단 오른쪽 표시란 -->
-        <div class="res-right">
+        <!-- <div class="res-right">
           <div class="r-box">
             <h2>선택 상품</h2>
           </div>
           <button>입력완료</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -121,14 +121,14 @@
         background: #9fd3cf;
         border-radius: 10px;
         padding: 30px 50px;
-        h2{
-        font-size: $text-lg;  
+        h2 {
+          font-size: $text-lg;
         }
-    &::after{
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+        &::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
       }
       .res-lf-btn {
         display: flex;
