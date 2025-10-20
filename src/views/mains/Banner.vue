@@ -1,29 +1,42 @@
 <template>
   <div class="banner-main">
-    <section class="main-banner hero-banner">
+    <section class="banner-inner">
       <swiper
         class="mbannerSwiper"
         :modules="[Autoplay, Navigation]"
         :autoplay="{ delay: 2500, disableOnInteraction: false }"
         :navigation="true"
         :loop="true">
+        <!-- banner 1 -->
         <swiper-slide>
           <div class="main-banner-frame">
             <div class="main-banner-txt">
-              <h1 class="mb-txt1">답답한 짐</h1>
-              <h2 class="mb-txt2">여행은 가볍게, 바로 입장!</h2>
-              <br />
+              <h1 class="mb-txt1">QR 코드 출입</h1>
+              <h2 class="mb-txt2">한 번의 스캔, 바로 입장</h2>
               <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
             </div>
             <div class="main-banner-img">
-              <img src="/images/mains/banner/bannerimg1.png" class="mb-img" alt="mainbannerimg" />
+              <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
             </div>
           </div>
         </swiper-slide>
-      
+
+        <!-- banner 2 -->
+        <swiper-slide>
+          <div class="main-banner-frame">
+            <div class="main-banner-txt">
+              <h1 class="mb-txt1">믿을 수 있는 보관</h1>
+              <h2 class="mb-txt2">전문가의 안심 관리</h2>
+              <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
+            </div>
+            <div class="main-banner-img">
+              <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />
+            </div>
+          </div>
+        </swiper-slide>
       </swiper>
 
-      <!-- ✅ 떠 있는(겹치는) 검색바: 배너의 하단 중심에 살짝 겹치도록 배치 -->
+      <!-- 떠 있는(겹치는) 검색바: 배너의 하단에 살짝 겹치도록 배치 -->
       <div class="search-dock">
         <div class="search-bar" role="search" aria-label="보관/배송 검색" ref="dockRef">
           <!-- 1) 목적지 -->
@@ -334,146 +347,91 @@ const Calendar = {
 <style lang="scss">
 @import "/src/assets/style/variables";
 
-/* 슬라이드 100% 폭으로 */
-.mbannerSwiper,
+.banner-main {
+  background-color: #f6f6f6;
+}
+.banner-inner {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+}
+/* Swiper 기본 */
+.mbannerSwiper {
+  width: 100%;
+}
 .mbannerSwiper .swiper-wrapper,
 .mbannerSwiper .swiper-slide {
   width: 100%;
 }
-
-.main-banner-frame {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  background: #f6f6f6;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  align-items: center;
-  column-gap: clamp(16px, 5vw, 48px);
-  padding: clamp(20px, 6vw, 56px);
+/* Swiper 네비게이션*/
+.banner-inner .swiper-button-prev,
+.banner-inner .swiper-button-next {
+  color: #028587;
 }
-
+.main-banner-frame {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  column-gap: 80px;
+  padding-top: 50px;
+  // padding: clamp(30px, 5vw, 60px) clamp(150px, 20vw, 200px);
+}
 .main-banner-txt {
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1vh, 12px);
-  padding-left: 280px;
+  gap: clamp(8px, 1.2vw, 16px);
+  padding-left: 150px;
 }
 
 .main-banner-txt .mb-txt1 {
-  font-size: clamp(25px, 1.2vw, 35px);
-  color: #555353;
-  font-weight: 600;
-}
-
-.main-banner-txt .mb-txt2 {
-  font-size: clamp(50px, 5vw, 65px);
-  white-space: nowrap;
+  font-size: $title-md;
   color: #028587;
-  font-weight: 700;
-  line-height: 0.8;
-}
-
-.main-banner-txt .mb-txt3 {
-  font-size: clamp(13px, 1.4vw, 24px);
-  color: #555353;
   font-weight: 600;
 }
-
+.main-banner-txt .mb-txt2 {
+  font-size: $title-xlg;
+  color: #000;
+  font-weight: 700;
+  line-height: 0.5;
+  white-space: nowrap;
+}
+.main-banner-txt .mb-txt3 {
+  font-size: $text-lg;
+  color: #000;
+  font-weight: 400;
+  margin-top: 12px;
+}
 .main-banner-img {
+  // width: clamp(300px, 34vw, 480px);
+  // height: clamp(240px, 30vw, 420px);
+  width: 420px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
-
-.mb-img {
-  width: clamp(180px, 28vw, 400px);
-  height: auto;
+.main-banner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
-// .main-banner-frame{
-//   width: 100%;
 
-//   background-color:  lightpink;
-// }
-// .main-banner-txt > .mb-txt1 {
-//   font-size: $title-md;
-//   color: #555353;
-//   font-weight: 500;
-// }
-
-// .main-banner-txt > .mb-txt2{
-//    font-size: 60px;
-//   color: #028587;
-//   font-weight: 600;
-// }
-
-// .main-banner-txt > .mb-txt3{
-//    font-size: $text-lg;
-//   color: #555353;
-// }
-
-// .main-banner-img {
-// width: 100%;
-// height: 530px;
-// }
-// .mb-img{
-// width: 25%;
-// }
-
-/* .banner-main .main-banner{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: #f3f3f3; 
-}
-.banner-main .main-banner img{
-  width: 100%;
-  max-width: 1920px;
-  height: auto;
-  display: block;
-  object-fit: cover;
-} */
-
-/* Swiper 네비게이션*/
-/* :deep(.mbannerSwiper .swiper-button-prev),
-:deep(.mbannerSwiper .swiper-button-next) {
-  color: #a3a3a3 !important; 
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-:deep(.mbannerSwiper .swiper-button-prev){
-  left: 4%;
-  right: auto ;
-}
-:deep(.mbannerSwiper .swiper-button-next){
-  right: 4% ;
-  left: auto;
-} */
-
-/* -------------------- 겹치는 서치바 포지셔닝 -------------------- */
+// search bar
 .banner-main .search-dock {
-  --overlap: 40%; /* 얼마나 아래로 겹칠지 (퍼센트 = 자기 높이 기준) */
   position: absolute;
   left: 50%;
-  bottom: 0;
-  transform: translate(-50%, var(--overlap));
-  width: 100%;
+  bottom: -150px;
+ transform: translateX(-50%);
+  width: calc(100% - 48px);   //좌 우 여백 24px *2
   max-width: 1320px;
-  padding: 0 24px;
-  z-index: 20; /* 배너보다 위 */
-  pointer-events: none; /* 겹친 상태에서도 바깥 클릭 버그 방지 */
+  z-index: 20;                     
+  pointer-events: none;     
 }
-.banner-main .search-dock > .search-bar {
-  pointer-events: auto;
-}
-
-/* -------------------- SearchBarOnly (원본 유지, 위치만 네임스페이스) -------------------- */
+.banner-main .search-dock > .search-bar{
+   pointer-events: auto; 
+  }
 .banner-main .search-bar {
   background: #fff;
   border: 1.5px solid #e5e7eb;
@@ -483,13 +441,10 @@ const Calendar = {
   display: grid;
   align-items: center;
   grid-template-columns: 1.05fr 0.9fr 0.95fr auto;
-  gap: 0;
   position: relative;
   overflow: visible;
   z-index: 10;
 }
-
-/* 항목 */
 .banner-main .search-item {
   padding: 14px 22px;
   position: relative;
@@ -503,326 +458,111 @@ const Calendar = {
 .banner-main .search-item:not(:first-child)::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 1px;
-  background: #e5e7eb;
+  left: 0; top: 12px; bottom: 12px;
+  width: 1px; background: #e5e7eb;
 }
 .banner-main .search-item.active {
-  background: #f7f7f8;
-  z-index: 20;
-}
-
-/* 텍스트 */
+   background: #f7f7f8; z-index: 20; 
+  }
 .banner-main .label {
-  font-size: 13px;
-  font-weight: 700;
-  color: #2b2b2b;
-  margin: 0 0 3px;
-  line-height: 1;
-  text-align: left;
+  font-size: 13px; font-weight: 700; color: #555353;
+  margin: 0 0 3px; line-height: 1; text-align: left;
 }
 .banner-main input {
-  border: none;
-  outline: none;
-  font-size: 15px;
-  color: #4b5563;
-  padding: 0;
-  width: 100%;
-  background: transparent;
-  text-align: left;
+  border: none; outline: none; font-size: 15px; color: #B8B3B3;
+  padding: 0; width: 100%; background: transparent; text-align: left;
 }
-.banner-main input::placeholder {
-  color: #a3a3a3;
-}
+.banner-main input::placeholder{
+   color: #a3a3a3; 
+  }
 
-/* 버튼 */
 .banner-main .search-btn {
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
-  background: #028587;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-left: 10px;
+  width: 50px; height: 50px; border: none; border-radius: 50%;
+  background: #028587; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; margin-left: 10px;
   box-shadow: 0 6px 16px rgba(2, 133, 135, 0.25);
-  transition: background 0.2s ease, transform 0.05s ease;
+  transition: background .2s ease, transform .05s ease;
 }
-.banner-main .search-btn:hover {
-  background: #019d9f;
-}
-.banner-main .search-btn:active {
-  transform: translateY(1px);
-}
+.banner-main .search-btn:hover { background: #028587; }
+.banner-main .search-btn:active { transform: translateY(1px); }
 
 /* Popover 공통 */
 .banner-main .popover {
-  position: absolute;
-  left: 22px;
-  right: 22px;
-  top: calc(100% + 12px);
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-  border: 1px solid #eee;
-  padding: 14px;
-  z-index: 30;
+  position: absolute; left: 22px; right: 22px; top: calc(100% + 12px);
+  background: #fff; border-radius: 22px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15); border: 1px solid #eee;
+  padding: 14px; z-index: 30;
 }
-
-/* 목적지 */
-.banner-main .popover-dest {
-  max-height: 420px;
-  overflow: auto;
-}
-.banner-main .popover-header {
-  font-weight: 700;
-  padding: 8px 10px 14px;
-}
-.banner-main .dest-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+//  목적지 찾기 //
+.banner-main .popover-dest { max-height: 300px; overflow: auto; }
+.banner-main .popover-header { font-weight: 700; padding: 8px 10px 14px; color: #028587;}
+.banner-main .dest-list { display: flex; flex-direction: column; gap: 5px; }
 .banner-main .dest-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  width: 100%;
-  border: 1px solid transparent;
-  background: #fff;
-  cursor: pointer;
+  display: flex; align-items: center; gap: 12px; padding: 8px 10px;
+  border-radius: 12px; width: 100%; border: 1px solid transparent; background: #fff; cursor: pointer;
 }
-.banner-main .dest-row:hover {
-  background: #f7f7f8;
-  border-color: #eee;
-}
+.banner-main .dest-row:hover { background: #D8F1EA; border-color: #eee; }
 .banner-main .dest-icon {
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #eef2f7;
-}
-.banner-main .dest-texts {
-  min-width: 0;
+  width: 36px; height: 36px; flex: 0 0 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; background: #eef2f7;
 }
 
 /* 날짜 */
-.banner-main .popover-dates {
-  padding: 18px 18px 12px;
-}
-.banner-main .date-tabs {
-  display: flex;
-  gap: 8px;
-  padding: 0 4px 10px;
-}
+.banner-main .popover-dates { padding: 18px 18px 15px; }
+.banner-main .date-tabs { display: flex; gap: 8px; padding: 0 4px 10px; }
 .banner-main .chip {
-  border: none;
-  background: #f2f3f5;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-weight: 600;
-  cursor: pointer;
+  border: none; background: #f2f3f5; border-radius: 999px; padding: 8px 14px; font-weight: 600; cursor: pointer;
 }
-.banner-main .chip.on {
-  background: #fff;
-  border: 1px solid #e6e7ea;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
+.banner-main .chip.on { background: #fff; border: 1px solid #eee; box-shadow: 0 2px 6px rgba(0,0,0,.04); }
 .banner-main .cal-head {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 4px;
+  display: grid; grid-template-columns: auto 1fr 1fr auto; align-items: center; gap: 10px; padding: 6px 4px;
 }
-.banner-main .cal-title {
-  text-align: center;
-  font-weight: 700;
-}
-.banner-main .nav-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 999px;
-  background: #f2f3f5;
-  cursor: pointer;
-}
-.banner-main .cal-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding-top: 6px;
-}
-
-.banner-main .cal {
-  background: #fff;
-  border-radius: 16px;
-}
-.banner-main .cal-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  padding: 8px;
-}
-.banner-main .dow {
-  text-align: center;
-  font-weight: 700;
-  color: #777;
-  padding: 6px 0;
-}
+.banner-main .cal-title { text-align: center; font-weight: 700; }
+.banner-main .nav-btn { width: 36px; height: 36px; border: none; border-radius: 999px; background: #f2f3f5; cursor: pointer; }
+.banner-main .cal-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 6px; }
+.banner-main .cal { background: #fff; border-radius: 16px; }
+.banner-main .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; padding: 8px; }
+.banner-main .dow { text-align: center; font-weight: 700; color: #777; padding: 6px 0; }
 .banner-main .day {
-  height: 40px;
-  border: none;
-  border-radius: 10px;
-  background: #fff;
-  cursor: pointer;
-  position: relative;
+  height: 40px; border: none; border-radius: 10px; background: #fff; cursor: pointer; position: relative;
 }
-.banner-main .day.empty {
-  background: transparent;
-  cursor: default;
-}
-.banner-main .day:hover:not(.empty) {
-  background: #f6f7f9;
-}
-.banner-main .day.inrange {
-  background: #e6f6f6;
-}
-.banner-main .day.start,
-.banner-main .day.end {
-  background: #028587;
-  color: #fff;
-}
-.banner-main .day.hovering {
-  background: #effcfc;
-}
+.banner-main .day.empty { background: transparent; cursor: default; }
+.banner-main .day:hover:not(.empty) { background: #f6f7f9; }
+.banner-main .day.inrange { background: #e6f6f6; }
+.banner-main .day.start, .banner-main .day.end { background: #028587; color: #fff; }
+.banner-main .day.hovering { background: #effcfc; }
 
 /* 짐(게스트) */
-.banner-main .popover-guests {
-  padding: 12px;
-  min-width: 420px;
-}
+.banner-main .popover-guests { padding: 12px; min-width: 420px; }
 .banner-main .guest-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 8px;
-  border-bottom: 1px solid #f0f0f0;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 8px; border-bottom: 1px solid #f0f0f0;
 }
-.banner-main .guest-row:last-child {
-  border-bottom: none;
-}
-.banner-main .guest-txt {
-  min-width: 0;
-}
-.banner-main .guest-ctrl {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.banner-main .guest-row:last-child { border-bottom: none; }
+.banner-main .guest-txt { min-width: 0; }
+.banner-main .guest-ctrl { display: flex; align-items: center; gap: 12px; }
 .banner-main .circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid #e1e1e5;
-  background: #fff;
-  cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e1e1e5; background: #fff; cursor: pointer;
 }
-.banner-main .circle:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-.banner-main .count {
-  width: 22px;
-  text-align: center;
-}
+.banner-main .circle:disabled { opacity: .4; cursor: not-allowed; }
+.banner-main .count { width: 22px; text-align: center; }
 
 /* 하단 액션 */
-.banner-main .date-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 4px 2px;
-}
-.banner-main .link-btn {
-  background: transparent;
-  border: none;
-  color: #6b7280;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.banner-main .grow {
-  flex: 1;
-}
-.banner-main .cta {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 12px;
-  background: #111;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-}
-.banner-main .cta:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.banner-main .date-actions { display: flex; align-items: center; gap: 10px; padding: 12px 4px 2px; }
+.banner-main .link-btn { background: transparent; border: none; color: #6b7280; text-decoration: underline; cursor: pointer; }
+.banner-main .grow { flex: 1; }
+.banner-main .cta { padding: 10px 16px; border: none; border-radius: 12px; background: #111; color: #fff; font-weight: 700; cursor: pointer; }
+.banner-main .cta:disabled { opacity: .5; cursor: not-allowed; }
 
 /* 공통 유틸 */
-.banner-main .stack-left {
-  display: grid;
-  grid-auto-rows: min-content;
-  row-gap: 2px;
-  justify-items: start;
-}
-.banner-main .stack-left > * {
-  margin: 0;
-  text-align: left;
-  padding-left: 0;
-}
+.banner-main .stack-left { display: grid; grid-auto-rows: min-content; row-gap: 2px; justify-items: start; }
+.banner-main .stack-left > * { margin: 0; text-align: left; padding-left: 0; }
 
-/* -------------------- 배너 아래 여백 -------------------- */
-.banner-main .hero-bottom-spacer {
-  height: 80px; /* 필요하면 조정 (서치바 높이/overlap에 따라) */
-}
+/* 배너 아래 여백(겹침 대비) */
+.banner-main .hero-bottom-spacer { height: 110px; }
 
-/* -------------------- 반응형(필요 최소한) -------------------- */
-@media (max-width: 960px) {
-  .banner-main .search-bar {
-    grid-template-columns: 1fr;
-    row-gap: 6px;
-    border-radius: 20px;
-  }
-  .banner-main .search-item:not(:first-child)::before {
-    display: none;
-  }
-  .banner-main .search-dock {
-    --overlap: 30%;
-    padding: 0 16px;
-  }
-  .banner-main .hero-bottom-spacer {
-    height: 100px;
-  }
-}
-@media (max-width: 560px) {
-  .banner-main .search-dock {
-    --overlap: 20%;
-  }
-  .banner-main .hero-bottom-spacer {
-    height: 110px;
-  }
-}
+
+
+
 </style>
