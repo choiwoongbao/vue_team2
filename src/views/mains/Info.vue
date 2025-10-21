@@ -238,6 +238,6 @@ function slideStyle(key) {
   .info-main .tabs{ width:100%; }
   .info-main .tab{ flex:1 1 0; min-width:0; }
   .info-main .carousel{ grid-template-columns:36px 1fr 36px; }
-  .info-main .nav{ width:36px; height:36px; font-size:22px; }
+  .info-main .nav{ width:36px; height:36px; font-size:22.1px; }
 }
 </style>
