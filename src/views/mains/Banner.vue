@@ -1,362 +1,60 @@
 <template>
-  <div class="banner-main">
-    <section class="banner-inner">
-      <swiper
-        class="mbannerSwiper"
-        :modules="[Autoplay, Navigation]"
-        :autoplay="{ delay: 2500, disableOnInteraction: false }"
-        :navigation="true"
-        :loop="true">
-        <!-- banner 1 -->
-        <swiper-slide>
-          <div class="main-banner-frame">
-            <div class="main-banner-txt">
-              <h1 class="mb-txt1">QR 코드 출입</h1>
-              <h2 class="mb-txt2">한 번의 스캔, 바로 입장</h2>
-              <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
-            </div>
-            <div class="main-banner-img">
-              <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
-            </div>
+  <section class="banner-inner">
+    <swiper
+      class="mbannerSwiper"
+      :modules="[Autoplay, Navigation]"
+      :autoplay="{ delay: 2500, disableOnInteraction: false }"
+      :navigation="true"
+      :loop="true">
+      <!-- banner 1 -->
+      <swiper-slide>
+        <div class="main-banner-frame">
+          <div class="main-banner-txt">
+            <h1 class="mb-txt1">QR 코드 출입</h1>
+            <h2 class="mb-txt2">한 번의 스캔, 바로 입장</h2>
+            <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
           </div>
-        </swiper-slide>
-
-        <!-- banner 2 -->
-        <swiper-slide>
-          <div class="main-banner-frame">
-            <div class="main-banner-txt">
-              <h1 class="mb-txt1">믿을 수 있는 보관</h1>
-              <h2 class="mb-txt2">전문가의 안심 관리</h2>
-              <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
-            </div>
-            <div class="main-banner-img">
-              <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />
-            </div>
+          <div class="main-banner-img">
+            <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
           </div>
-        </swiper-slide>
-      </swiper>
-
-      <!-- 떠 있는(겹치는) 검색바: 배너의 하단에 살짝 겹치도록 배치 -->
-      <div class="search-dock">
-        <div class="search-bar" role="search" aria-label="보관/배송 검색" ref="dockRef">
-          <!-- 1) 목적지 -->
-          <div class="search-item" :class="{ active: openPanel === 'dest' }" @click="toggle('dest')">
-            <label class="label">목적지 찾기</label>
-            <input
-              type="text"
-              :value="destination || ''"
-              :placeholder="destination ? '' : '어느 지역을 방문하시나요?'"
-              readonly />
-            <!-- 목적지 패널 -->
-            <div v-if="openPanel === 'dest'" class="popover popover-dest" role="dialog" aria-label="목적지 선택">
-              <div class="popover-header">추천 목적지</div>
-              <div class="dest-list">
-                <button v-for="s in suggestions" :key="s.id" class="dest-row" @click.stop="selectDestination(s.name)">
-                  <span class="dest-icon" aria-hidden="true">🏙️</span>
-                  <span class="dest-texts stack-left">
-                    <strong>{{ s.name }}</strong>
-                    <small>{{ s.sub }}</small>
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2) 날짜 -->
-          <div class="search-item" :class="{ active: openPanel === 'dates' }" @click="toggle('dates')">
-            <label class="label">보관 기간</label>
-            <input type="text" :value="dateLabel" placeholder="날짜 선택" readonly />
-
-            <div
-              v-if="openPanel === 'dates'"
-              class="popover popover-dates"
-              role="dialog"
-              aria-label="날짜 선택"
-              @keydown.esc.prevent.stop="close()">
-              <div class="date-tabs">
-                <button class="chip" :class="{ on: dateTab === 'range' }" @click.stop="dateTab = 'range'">
-                  날짜 지정
-                </button>
-                <button class="chip" :class="{ on: dateTab === 'month' }" @click.stop="dateTab = 'month'">
-                  월 단위
-                </button>
-                <button class="chip" :class="{ on: dateTab === 'flex' }" @click.stop="dateTab = 'flex'">
-                  유연한 일정
-                </button>
-              </div>
-
-              <div class="cal-head">
-                <button class="nav-btn" @click.stop="prevMonth" aria-label="이전 달">‹</button>
-                <div class="cal-title">{{ monthTitle(viewYear, viewMonth) }}</div>
-                <div class="spacer"></div>
-                <div class="cal-title">{{ monthTitle(nextYear, nextMonth) }}</div>
-                <button class="nav-btn" @click.stop="nextMonthNav" aria-label="다음 달">›</button>
-              </div>
-
-              <div class="cal-2col">
-                <Calendar
-                  :year="viewYear"
-                  :month="viewMonth"
-                  :start="startDate"
-                  :end="endDate"
-                  :hover="hoverDate"
-                  @pick="onPickDate"
-                  @hover="hoverDate = $event" />
-                <Calendar
-                  :year="nextYear"
-                  :month="nextMonth"
-                  :start="startDate"
-                  :end="endDate"
-                  :hover="hoverDate"
-                  @pick="onPickDate"
-                  @hover="hoverDate = $event" />
-              </div>
-
-              <div class="date-actions">
-                <button class="link-btn" @click.stop="clearDates">지우기</button>
-                <div class="grow"></div>
-                <button class="cta" :disabled="!startDate || !endDate" @click.stop="applyDates">적용</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3) 짐 크기/개수 -->
-          <div class="search-item" :class="{ active: openPanel === 'bags' }" @click="toggle('bags')">
-            <label class="label">짐 크기/개수</label>
-            <input type="text" :value="bagsLabel" placeholder="어떤 짐을 보관하시나요?" readonly />
-
-            <div
-              v-if="openPanel === 'bags'"
-              class="popover popover-guests"
-              role="dialog"
-              aria-label="짐 크기/개수 선택"
-              @keydown.esc.prevent.stop="close()">
-              <div v-for="row in bagRows" :key="row.key" class="guest-row">
-                <div class="guest-txt stack-left">
-                  <strong>{{ row.title }}</strong>
-                  <small>{{ row.desc }}</small>
-                </div>
-                <div class="guest-ctrl">
-                  <button class="circle" :disabled="counters[row.key] === 0" @click.stop="dec(row.key)">−</button>
-                  <span class="count">{{ counters[row.key] }}</span>
-                  <button class="circle" @click.stop="inc(row.key)">＋</button>
-                </div>
-              </div>
-
-              <div class="date-actions">
-                <button class="link-btn" @click.stop="resetBags">지우기</button>
-                <div class="grow"></div>
-                <button class="cta" @click.stop="applyBags">적용</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 검색 버튼 -->
-          <button class="search-btn" aria-label="검색" @click="submit">
-            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-              <path
-                d="M21 21l-4.4-4.4M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </button>
         </div>
-      </div>
-    </section>
+      </swiper-slide>
 
-    <!-- 배너 아래 콘텐츠가 겹치지 않도록 여백 확보 -->
-    <div class="hero-bottom-spacer" aria-hidden="true"></div>
-  </div>
+      <!-- banner 2 -->
+      <swiper-slide>
+        <div class="main-banner-frame">
+          <div class="main-banner-txt">
+            <h1 class="mb-txt1">안전한 보관</h1>
+            <h2 class="mb-txt2">전문가의 안심 관리</h2>
+            <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
+          </div>
+          <div class="main-banner-img">
+            <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </section>
 </template>
 
 <script setup>
-/* -------------------- Swiper (배너) -------------------- */
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
-
-/* -------------------- SearchBarOnly (그대로) -------------------- */
-import { ref, reactive, computed } from "vue";
-
-/* 패널 열기/닫기 */
-const openPanel = ref(null);
-const dockRef = ref();
-function toggle(which) {
-  openPanel.value = openPanel.value === which ? null : which;
-}
-function close() {
-  openPanel.value = null;
-}
-
-/* 목적지 */
-const destination = ref("");
-const suggestions = [
-  { id: 1, name: "부산", sub: "해변으로 인기 있는 곳" },
-  { id: 2, name: "광안리해수욕장, 부산", sub: "해변의 매력을 느낄 수 있는 곳" },
-  { id: 3, name: "강릉시, 강원도", sub: "자연을 만끽하기 좋은 곳" },
-  { id: 4, name: "속초시, 강원도", sub: "호수로 인기 있는 곳" },
-  { id: 5, name: "오사카시, 일본", sub: "관광 명소: 오사카성" },
-  { id: 6, name: "전주시, 전라북도", sub: "다이닝을 즐기기 좋은 곳" },
-];
-function selectDestination(name) {
-  destination.value = name;
-  close();
-}
-
-/* 날짜 범위 */
-const dateTab = ref("range");
-const startDate = ref(null);
-const endDate = ref(null);
-const hoverDate = ref(null);
-
-const today = new Date();
-const viewYear = ref(today.getFullYear());
-const viewMonth = ref(today.getMonth());
-const nextYear = computed(() => (viewMonth.value === 11 ? viewYear.value + 1 : viewYear.value));
-const nextMonth = computed(() => (viewMonth.value === 11 ? 0 : viewMonth.value + 1));
-
-function monthTitle(y, m) {
-  return `${y}년 ${m + 1}월`;
-}
-function prevMonth() {
-  viewMonth.value === 0 ? ((viewMonth.value = 11), viewYear.value--) : viewMonth.value--;
-}
-function nextMonthNav() {
-  viewMonth.value === 11 ? ((viewMonth.value = 0), viewYear.value++) : viewMonth.value++;
-}
-
-function onPickDate(d) {
-  if (!startDate.value || (startDate.value && endDate.value)) {
-    startDate.value = d;
-    endDate.value = null;
-  } else if (d < startDate.value) {
-    endDate.value = startDate.value;
-    startDate.value = d;
-  } else {
-    endDate.value = d;
-  }
-}
-function clearDates() {
-  startDate.value = null;
-  endDate.value = null;
-  hoverDate.value = null;
-}
-function applyDates() {
-  close();
-}
-function fmt(d) {
-  return `${d.getMonth() + 1}월 ${d.getDate()}일`;
-}
-const dateLabel = computed(() =>
-  startDate.value && endDate.value
-    ? `${fmt(startDate.value)} - ${fmt(endDate.value)}`
-    : startDate.value
-    ? `${fmt(startDate.value)} - ...`
-    : ""
-);
-
-/* 짐 크기/개수 */
-const counters = reactive({ small: 0, medium: 0, large: 0, box: 0 });
-const bagRows = [
-  { key: "small", title: "소형 가방", desc: "기내용 백팩·토트" },
-  { key: "medium", title: "중형 캐리어", desc: "24~26인치" },
-  { key: "large", title: "대형 캐리어", desc: "27인치 이상" },
-  { key: "box", title: "박스/기타", desc: "상자·특수물품" },
-];
-const inc = (k) => counters[k]++;
-const dec = (k) => counters[k] && counters[k]--;
-const resetBags = () => {
-  Object.keys(counters).forEach((k) => (counters[k] = 0));
-};
-const applyBags = () => close();
-const bagsLabel = computed(() => {
-  const p = [];
-  if (counters.small) p.push(`소형 ${counters.small}`);
-  if (counters.medium) p.push(`중형 ${counters.medium}`);
-  if (counters.large) p.push(`대형 ${counters.large}`);
-  if (counters.box) p.push(`박스 ${counters.box}`);
-  return p.join(" · ");
-});
-
-/* 제출 (데모) */
-function submit() {
-  console.log("검색 파라미터", {
-    destination: destination.value,
-    start: startDate.value && startDate.value.toISOString().slice(0, 10),
-    end: endDate.value && endDate.value.toISOString().slice(0, 10),
-    bags: { ...counters },
-  });
-}
-
-/* 로컬 Calendar 컴포넌트 */
-const Calendar = {
-  name: "Calendar",
-  props: { year: Number, month: Number, start: Date, end: Date, hover: Date },
-  emits: ["pick", "hover"],
-  computed: {
-    grid() {
-      const first = new Date(this.year, this.month, 1);
-      const startIdx = (first.getDay() + 6) % 7;
-      const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
-      const cells = [];
-      for (let i = 0; i < startIdx; i++) cells.push(null);
-      for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(this.year, this.month, d));
-      while (cells.length % 7 !== 0) cells.push(null);
-      return cells;
-    },
-  },
-  methods: {
-    isSame(a, b) {
-      return a && b && a.toDateString() === b.toDateString();
-    },
-    inRange(d) {
-      return this.start && this.end && d >= this.start && d <= this.end;
-    },
-    hovering(d) {
-      if (!this.start || this.end || !this.hover) return false;
-      const [min, max] = this.hover > this.start ? [this.start, this.hover] : [this.hover, this.start];
-      return d >= min && d <= max;
-    },
-  },
-  template: `
-    <div class="cal">
-      <div class="cal-grid">
-        <div class="dow" v-for="d in ['일','월','화','수','목','금','토']" :key="d">{{ d }}</div>
-        <button
-          v-for="(cell,i) in grid" :key="i"
-          class="day"
-          :class="{empty:!cell, start: cell && isSame(cell,start),
-                   end: cell && isSame(cell,end), inrange: cell && inRange(cell),
-                   hovering: cell && hovering(cell)}"
-          :disabled="!cell"
-          @mouseenter="$emit('hover', cell)"
-          @focus="$emit('hover', cell)"
-          @click="$emit('pick', cell)"
-        >
-          <span v-if="cell">{{ cell.getDate() }}</span>
-        </button>
-      </div>
-    </div>`,
-};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "/src/assets/style/variables";
 
-.banner-main {
-  background-color: #f6f6f6;
-}
 .banner-inner {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1920px;
   margin: 0 auto;
   position: relative;
 }
-/* Swiper 기본 */
+
+/* Swiper */
 .mbannerSwiper {
   width: 100%;
 }
@@ -364,49 +62,67 @@ const Calendar = {
 .mbannerSwiper .swiper-slide {
   width: 100%;
 }
-/* Swiper 네비게이션*/
-.banner-inner .swiper-button-prev,
-.banner-inner .swiper-button-next {
-  color: #028587;
+
+/* 네비게이션 색 */
+.banner-inner :deep(.swiper-button-prev),
+.banner-inner :deep(.swiper-button-next) {
+  color: #b3b3b3;
 }
+
+.banner-inner :deep(.swiper-button-prev) {
+  left: clamp(16px, 8vw, 120px);
+}
+.banner-inner :deep(.swiper-button-next) {
+  right: clamp(16px, 8vw, 120px);
+}
+
+/* 배너 레이아웃 */
 .main-banner-frame {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  column-gap: 80px;
-  padding-top: 50px;
-  // padding: clamp(30px, 5vw, 60px) clamp(150px, 20vw, 200px);
+  column-gap: clamp(24px, 1vw, 10px);
+  padding-top: clamp(40px, 6vw, 80px);
+  background-color: #f6f6f6;
+   isolation: isolate;  
 }
+
 .main-banner-txt {
   display: flex;
   flex-direction: column;
+   justify-content: flex-start !important;
+  align-items: flex-start !important;  
   gap: clamp(8px, 1.2vw, 16px);
-  padding-left: 150px;
+  padding-bottom: 90px;
+  padding-left: clamp(24px, 20vw, 400px);
+    line-height: 0.7;
 }
-
+.main-banner-txt .mb-txt1,
+.main-banner-txt .mb-txt2,
+.main-banner-txt .mb-txt3 {
+  padding-left: 0;
+}
 .main-banner-txt .mb-txt1 {
-  font-size: $title-md;
+  font-size: clamp(18px, 1.6vw, 28px);
   color: #028587;
   font-weight: 600;
 }
 .main-banner-txt .mb-txt2 {
-  font-size: $title-xlg;
+  font-size: clamp(28px, 3.6vw, 60px);
   color: #000;
   font-weight: 700;
-  line-height: 0.5;
   white-space: nowrap;
 }
 .main-banner-txt .mb-txt3 {
-  font-size: $text-lg;
+  font-size: clamp(14px, 1.4vw, 18px);
   color: #000;
   font-weight: 400;
-  margin-top: 12px;
+  margin-top: clamp(5px, 0.8vw, 12px);
 }
+
 .main-banner-img {
-  // width: clamp(300px, 34vw, 480px);
-  // height: clamp(240px, 30vw, 420px);
-  width: 420px;
-  height: 350px;
+  width: clamp(260px, 22vw, 350px);
+  height: clamp(200px, 20vw, 350px);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -418,151 +134,252 @@ const Calendar = {
   display: block;
 }
 
-// search bar
-.banner-main .search-dock {
-  position: absolute;
-  left: 50%;
-  bottom: -150px;
- transform: translateX(-50%);
-  width: calc(100% - 48px);   //좌 우 여백 24px *2
-  max-width: 1320px;
-  z-index: 20;                     
-  pointer-events: none;     
-}
-.banner-main .search-dock > .search-bar{
-   pointer-events: auto; 
+@media (max-width: 768px) {
+  .main-banner-frame {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    column-gap: clamp(24px, 1vw, 10px);
+    padding-top: clamp(40px, 6vw, 80px);
+    background-color: #f6f6f6;
   }
-.banner-main .search-bar {
-  background: #fff;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 9999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 12px 14px;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1.05fr 0.9fr 0.95fr auto;
-  position: relative;
-  overflow: visible;
-  z-index: 10;
-}
-.banner-main .search-item {
-  padding: 14px 22px;
-  position: relative;
-  display: grid;
-  grid-auto-rows: min-content;
-  align-content: center;
-  min-height: 50px;
-  cursor: pointer;
-  z-index: 11;
-}
-.banner-main .search-item:not(:first-child)::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 12px; bottom: 12px;
-  width: 1px; background: #e5e7eb;
-}
-.banner-main .search-item.active {
-   background: #f7f7f8; z-index: 20; 
+  .main-banner-txt {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 0.5vw, 12px);
+    padding-bottom: 50px;
+    padding-left: 120px;
   }
-.banner-main .label {
-  font-size: 13px; font-weight: 700; color: #555353;
-  margin: 0 0 3px; line-height: 1; text-align: left;
-}
-.banner-main input {
-  border: none; outline: none; font-size: 15px; color: #B8B3B3;
-  padding: 0; width: 100%; background: transparent; text-align: left;
-}
-.banner-main input::placeholder{
-   color: #a3a3a3; 
+  .main-banner-txt .mb-txt2 {
+    white-space: nowrap;
   }
 
-.banner-main .search-btn {
-  width: 50px; height: 50px; border: none; border-radius: 50%;
-  background: #028587; color: #fff;
-  display: inline-flex; align-items: center; justify-content: center;
-  cursor: pointer; margin-left: 10px;
-  box-shadow: 0 6px 16px rgba(2, 133, 135, 0.25);
-  transition: background .2s ease, transform .05s ease;
-}
-.banner-main .search-btn:hover { background: #028587; }
-.banner-main .search-btn:active { transform: translateY(1px); }
-
-/* Popover 공통 */
-.banner-main .popover {
-  position: absolute; left: 22px; right: 22px; top: calc(100% + 12px);
-  background: #fff; border-radius: 22px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.15); border: 1px solid #eee;
-  padding: 14px; z-index: 30;
-}
-//  목적지 찾기 //
-.banner-main .popover-dest { max-height: 300px; overflow: auto; }
-.banner-main .popover-header { font-weight: 700; padding: 8px 10px 14px; color: #028587;}
-.banner-main .dest-list { display: flex; flex-direction: column; gap: 5px; }
-.banner-main .dest-row {
-  display: flex; align-items: center; gap: 12px; padding: 8px 10px;
-  border-radius: 12px; width: 100%; border: 1px solid transparent; background: #fff; cursor: pointer;
-}
-.banner-main .dest-row:hover { background: #D8F1EA; border-color: #eee; }
-.banner-main .dest-icon {
-  width: 36px; height: 36px; flex: 0 0 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center; background: #eef2f7;
+  /* swiper */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 35px;
+    height: 35px;
+  }
+  .banner-inner :deep(.swiper-button-prev) {
+    left: clamp(12px, 6vw, 24px);
+  }
+  .banner-inner :deep(.swiper-button-next) {
+    right: clamp(12px, 6vw, 24px);
+  }
 }
 
-/* 날짜 */
-.banner-main .popover-dates { padding: 18px 18px 15px; }
-.banner-main .date-tabs { display: flex; gap: 8px; padding: 0 4px 10px; }
-.banner-main .chip {
-  border: none; background: #f2f3f5; border-radius: 999px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+@media (max-width: 760px) {
+  .main-banner-frame {
+    grid-template-columns: 1fr;  
+    row-gap: 30px;
+    padding: 40px 20px;     
+    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
+    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  }
+  .main-banner-txt {
+    padding: 0px 60px;          
+    align-self: start;          
+    justify-self: start;         
+    white-space: nowrap;
+    line-height: 0.7;
+padding-left: 150px;
+  }
+    .main-banner-txt .mb-txt1{font-size: 18px;}
+  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
+    .main-banner-txt .mb-txt3{font-size: 13px;}
+
+  .main-banner-img {
+    width: 270px;                 
+    max-width: 85vw;              
+    height: auto;                
+    justify-self: center;       
+  }
+  .main-banner-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 스와이퍼 버튼도 조금 안쪽/작게 */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 28px;
+    height: 28px;
+  }
+  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
+  .banner-inner :deep(.swiper-button-next) { right: 30px; }
 }
-.banner-main .chip.on { background: #fff; border: 1px solid #eee; box-shadow: 0 2px 6px rgba(0,0,0,.04); }
-.banner-main .cal-head {
-  display: grid; grid-template-columns: auto 1fr 1fr auto; align-items: center; gap: 10px; padding: 6px 4px;
+
+@media (max-width: 530px) {
+  .main-banner-frame {
+    grid-template-columns: 1fr;  
+    row-gap: 30px;
+    padding: 40px 20px;     
+    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
+    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  }
+  .main-banner-txt {
+    padding: 0px 80px;          
+    align-self: start;          
+    justify-self: start;         
+    white-space: nowrap;
+    line-height: 0.4;
+padding-left: 100px;
+  }
+    .main-banner-txt .mb-txt1{font-size: 18px;}
+  .main-banner-txt .mb-txt2 { font-size: 35px; line-height: 1.1; }
+    .main-banner-txt .mb-txt3{font-size: 13px;}
+
+  .main-banner-img {
+    width: 300px;                 
+    max-width: 85vw;              
+    height: auto;                
+    justify-self: center;       
+  }
+  .main-banner-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 스와이퍼 버튼도 조금 안쪽/작게 */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 28px;
+    height: 28px;
+  }
+  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
+  .banner-inner :deep(.swiper-button-next) { right: 30px; }
 }
-.banner-main .cal-title { text-align: center; font-weight: 700; }
-.banner-main .nav-btn { width: 36px; height: 36px; border: none; border-radius: 999px; background: #f2f3f5; cursor: pointer; }
-.banner-main .cal-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 6px; }
-.banner-main .cal { background: #fff; border-radius: 16px; }
-.banner-main .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; padding: 8px; }
-.banner-main .dow { text-align: center; font-weight: 700; color: #777; padding: 6px 0; }
-.banner-main .day {
-  height: 40px; border: none; border-radius: 10px; background: #fff; cursor: pointer; position: relative;
+
+@media (max-width: 490px) {
+  .main-banner-frame {
+    grid-template-columns: 1fr;  
+    row-gap: 30px;
+    padding: 40px 20px;     
+    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
+    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  }
+  .main-banner-txt {
+    padding: 0px 80px;          
+    align-self: start;          
+    justify-self: start;         
+    white-space: nowrap;
+    line-height: 0.4;
+padding-left: 60px;
+  }
+    .main-banner-txt .mb-txt1{font-size: 18px;}
+  .main-banner-txt .mb-txt2 { font-size: 33px; line-height: 1.1; }
+    .main-banner-txt .mb-txt3{font-size: 13px;}
+
+  .main-banner-img {
+    width: 280px;                 
+    max-width: 85vw;              
+    height: auto;                
+    justify-self: center;       
+  }
+  .main-banner-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 스와이퍼 버튼도 조금 안쪽/작게 */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 28px;
+    height: 28px;
+  }
+  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
+  .banner-inner :deep(.swiper-button-next) { right: 30px; }
 }
-.banner-main .day.empty { background: transparent; cursor: default; }
-.banner-main .day:hover:not(.empty) { background: #f6f7f9; }
-.banner-main .day.inrange { background: #e6f6f6; }
-.banner-main .day.start, .banner-main .day.end { background: #028587; color: #fff; }
-.banner-main .day.hovering { background: #effcfc; }
 
-/* 짐(게스트) */
-.banner-main .popover-guests { padding: 12px; min-width: 420px; }
-.banner-main .guest-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 14px 8px; border-bottom: 1px solid #f0f0f0;
+@media (max-width: 430px) {
+  .main-banner-frame {
+    grid-template-columns: 1fr;  
+    row-gap: 30px;
+    padding: 40px 20px;     
+    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
+    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  }
+  .main-banner-txt {
+    padding: 0px 80px;          
+    align-self: start;          
+    justify-self: start;         
+    white-space: nowrap;
+    line-height: 0.4;
+padding-left: 45px;
+  }
+    .main-banner-txt .mb-txt1{font-size: 15px;}
+  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
+    .main-banner-txt .mb-txt3{font-size: 13px;}
+
+  .main-banner-img {
+    width: 280px;                 
+    max-width: 85vw;              
+    height: auto;                
+    justify-self: center;       
+  }
+  .main-banner-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 스와이퍼 버튼도 조금 안쪽/작게 */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 28px;
+    height: 28px;
+  }
+  .banner-inner :deep(.swiper-button-prev) { left: 18px; }
+  .banner-inner :deep(.swiper-button-next) { right: 18px; }
 }
-.banner-main .guest-row:last-child { border-bottom: none; }
-.banner-main .guest-txt { min-width: 0; }
-.banner-main .guest-ctrl { display: flex; align-items: center; gap: 12px; }
-.banner-main .circle {
-  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e1e1e5; background: #fff; cursor: pointer;
+
+@media (max-width: 390px) {
+  .main-banner-frame {
+    grid-template-columns: 1fr;  
+    row-gap: 30px;
+    padding: 40px 20px;     
+    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
+    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  }
+  .main-banner-txt {
+    padding: 0px 80px;          
+    align-self: start;          
+    justify-self: start;         
+    white-space: nowrap;
+    line-height: 0.4;
+padding-left: 45px;
+  }
+    .main-banner-txt .mb-txt1{font-size: 15px;}
+  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
+    .main-banner-txt .mb-txt3{font-size: 13px;}
+
+  .main-banner-img {
+    width: 270px;                 
+    max-width: 85vw;              
+    height: auto;                
+    justify-self: center;       
+  }
+  .main-banner-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* 스와이퍼 버튼도 조금 안쪽/작게 */
+  .banner-inner :deep(.swiper-button-prev),
+  .banner-inner :deep(.swiper-button-next) {
+    width: 28px;
+    height: 28px;
+  }
+  .banner-inner :deep(.swiper-button-prev) { left: 15px; }
+  .banner-inner :deep(.swiper-button-next) { right: 10px; }
 }
-.banner-main .circle:disabled { opacity: .4; cursor: not-allowed; }
-.banner-main .count { width: 22px; text-align: center; }
-
-/* 하단 액션 */
-.banner-main .date-actions { display: flex; align-items: center; gap: 10px; padding: 12px 4px 2px; }
-.banner-main .link-btn { background: transparent; border: none; color: #6b7280; text-decoration: underline; cursor: pointer; }
-.banner-main .grow { flex: 1; }
-.banner-main .cta { padding: 10px 16px; border: none; border-radius: 12px; background: #111; color: #fff; font-weight: 700; cursor: pointer; }
-.banner-main .cta:disabled { opacity: .5; cursor: not-allowed; }
-
-/* 공통 유틸 */
-.banner-main .stack-left { display: grid; grid-auto-rows: min-content; row-gap: 2px; justify-items: start; }
-.banner-main .stack-left > * { margin: 0; text-align: left; padding-left: 0; }
-
-/* 배너 아래 여백(겹침 대비) */
-.banner-main .hero-bottom-spacer { height: 110px; }
-
-
-
-
 </style>
