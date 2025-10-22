@@ -1,39 +1,42 @@
 <template>
-  <section class="banner-inner">
-    <swiper
-      class="mbannerSwiper"
-      :modules="[Autoplay, Navigation]"
-      :autoplay="{ delay: 2500, disableOnInteraction: false }"
-      :navigation="true"
-      :loop="true">
-      <!-- banner 1 -->
-      <swiper-slide>
-        <div class="main-banner-frame">
-          <div class="main-banner-txt">
-            <h1 class="mb-txt1">QR 코드 출입</h1>
-            <h2 class="mb-txt2">한 번의 스캔, 바로 입장</h2>
-            <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
+  <section class="banner-outer">
+    <div class="banner-center">
+      <swiper
+        class="mbannerSwiper"
+        :modules="[Autoplay, Navigation]"
+        :autoplay="{ delay: 2500, disableOnInteraction: false }"
+        :navigation="true"
+        :loop="true"
+      >
+        <!-- slide 1 -->
+        <swiper-slide>
+          <div class="banner-grid">
+            <div class="main-banner-txt">
+              <h1 class="mb-txt1">QR 코드 출입</h1>
+              <h2 class="mb-txt2">한 번의 스캔, 바로 입장</h2>
+              <h3 class="mb-txt3">이용은 간단하게, 보안은 확실하게 보장합니다.</h3>
+            </div>
+            <div class="main-banner-img">
+              <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
+            </div>
           </div>
-          <div class="main-banner-img">
-            <img src="/public/images/mains/banner/bannerimg2.png" alt="mainbannerimg" />
-          </div>
-        </div>
-      </swiper-slide>
+        </swiper-slide>
 
-      <!-- banner 2 -->
-      <swiper-slide>
-        <div class="main-banner-frame">
-          <div class="main-banner-txt">
-            <h1 class="mb-txt1">안전한 보관</h1>
-            <h2 class="mb-txt2">전문가의 안심 관리</h2>
-            <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
+        <!-- slide 2 -->
+        <swiper-slide>
+          <div class="banner-grid">
+            <div class="main-banner-txt">
+              <h1 class="mb-txt1">안전한 보관</h1>
+              <h2 class="mb-txt2">전문가의 안심 관리</h2>
+              <h3 class="mb-txt3">전문가의 손길로 짐을 꼼꼼하게 관리합니다.</h3>
+            </div>
+            <div class="main-banner-img">
+              <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />
+            </div>
           </div>
-          <div class="main-banner-img">
-            <img src="/public/images/mains/banner/bannerimg3.png" alt="mainbannerimg" />
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper>
+        </swiper-slide>
+      </swiper>
+    </div>
   </section>
 </template>
 
@@ -45,154 +48,87 @@ import { Autoplay, Navigation } from "swiper/modules";
 </script>
 
 <style lang="scss" scoped>
-@import "/src/assets/style/variables";
+/* =========================================================
+   1920px 기준 높이 530px 유지 / 비율 고정 반응형
+   1000px 이하부터는 세로형 레이아웃 전환
+   ========================================================= */
 
-.banner-inner {
+/* 배경 */
+.banner-outer {
   width: 100%;
+  background: #f6f6f6;
+  overflow: hidden;
+}
+
+/* 컨테이너 */
+.banner-center {
   max-width: 1920px;
   margin: 0 auto;
   position: relative;
 }
 
-/* Swiper */
+/* Swiper 공통 */
 .mbannerSwiper {
   width: 100%;
+  height: 100%;
 }
-.mbannerSwiper .swiper-wrapper,
-.mbannerSwiper .swiper-slide {
-  width: 100%;
-}
-
-/* 네비게이션 색 */
-.banner-inner :deep(.swiper-button-prev),
-.banner-inner :deep(.swiper-button-next) {
+:deep(.swiper-button-prev),
+:deep(.swiper-button-next) {
   color: #b3b3b3;
 }
 
-.banner-inner :deep(.swiper-button-prev) {
-  left: clamp(16px, 8vw, 120px);
-}
-.banner-inner :deep(.swiper-button-next) {
-  right: clamp(16px, 8vw, 120px);
-}
-
-/* 배너 레이아웃 */
-.main-banner-frame {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  column-gap: clamp(24px, 1vw, 10px);
-  padding-top: clamp(40px, 6vw, 80px);
-  background-color: #f6f6f6;
-   isolation: isolate;  
-}
-
-.main-banner-txt {
-  display: flex;
-  flex-direction: column;
-   justify-content: flex-start !important;
-  align-items: flex-start !important;  
-  gap: clamp(8px, 1.2vw, 16px);
-  padding-bottom: 90px;
-  padding-left: clamp(24px, 20vw, 400px);
-    line-height: 0.7;
-}
-.main-banner-txt .mb-txt1,
-.main-banner-txt .mb-txt2,
-.main-banner-txt .mb-txt3 {
-  padding-left: 0;
-}
-.main-banner-txt .mb-txt1 {
-  font-size: clamp(18px, 1.6vw, 28px);
-  color: #028587;
-  font-weight: 600;
-}
-.main-banner-txt .mb-txt2 {
-  font-size: clamp(28px, 3.6vw, 60px);
-  color: #000;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.main-banner-txt .mb-txt3 {
-  font-size: clamp(14px, 1.4vw, 18px);
-  color: #000;
-  font-weight: 400;
-  margin-top: clamp(5px, 0.8vw, 12px);
-}
-
-.main-banner-img {
-  width: clamp(260px, 22vw, 350px);
-  height: clamp(200px, 20vw, 350px);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.main-banner-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .main-banner-frame {
+/* ======================= ≥1000px ======================= */
+@media (min-width: 1000px) {
+  .banner-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns:
+      clamp(520px, 33.5vw, 640px)
+      clamp(360px, 22vw, 416px);
+    column-gap: clamp(40px, 3.3vw, 64px);
     align-items: center;
-    column-gap: clamp(24px, 1vw, 10px);
-    padding-top: clamp(40px, 6vw, 80px);
-    background-color: #f6f6f6;
+    justify-content: center;
+    width: 100%;
+    max-width: clamp(960px, 58vw, 1120px);
+    margin: 0 auto;
+
+    /* 높이: 1920px → 530px 비율 유지 (1000px에서 약 276px) */
+    min-height: clamp(276px, 27.6vw, 530px);
   }
+
+  /* 텍스트 */
   .main-banner-txt {
     display: flex;
     flex-direction: column;
-    gap: clamp(8px, 0.5vw, 12px);
-    padding-bottom: 50px;
-    padding-left: 120px;
+    gap: clamp(8px, 0.9vw, 12px);
+    line-height: 1.2;
   }
-  .main-banner-txt .mb-txt2 {
-    white-space: nowrap;
+  .mb-txt1 {
+    font-size: clamp(16px, 1.05vw, 20px);
+    color: #028587;
+    font-weight: 600;
+    margin: 0;
+  }
+  .mb-txt2 {
+    font-size: clamp(40px, 3.3vw, 64px);
+    font-weight: 800;
+    color: #000;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .mb-txt3 {
+    font-size: clamp(14px, 0.94vw, 18px);
+    color: #000;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0;
   }
 
-  /* swiper */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
-    width: 35px;
-    height: 35px;
-  }
-  .banner-inner :deep(.swiper-button-prev) {
-    left: clamp(12px, 6vw, 24px);
-  }
-  .banner-inner :deep(.swiper-button-next) {
-    right: clamp(12px, 6vw, 24px);
-  }
-}
-
-@media (max-width: 760px) {
-  .main-banner-frame {
-    grid-template-columns: 1fr;  
-    row-gap: 30px;
-    padding: 40px 20px;     
-    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
-    text-align: left;             /* 텍스트는 왼쪽 정렬 */
-  }
-  .main-banner-txt {
-    padding: 0px 60px;          
-    align-self: start;          
-    justify-self: start;         
-    white-space: nowrap;
-    line-height: 0.7;
-padding-left: 150px;
-  }
-    .main-banner-txt .mb-txt1{font-size: 18px;}
-  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
-    .main-banner-txt .mb-txt3{font-size: 13px;}
-
+  /* 이미지 */
   .main-banner-img {
-    width: 270px;                 
-    max-width: 85vw;              
-    height: auto;                
-    justify-self: center;       
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
   .main-banner-img img {
     width: 100%;
@@ -200,186 +136,68 @@ padding-left: 150px;
     object-fit: contain;
     display: block;
   }
-
-  /* 스와이퍼 버튼도 조금 안쪽/작게 */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
-    width: 28px;
-    height: 28px;
-  }
-  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
-  .banner-inner :deep(.swiper-button-next) { right: 30px; }
 }
 
-@media (max-width: 530px) {
-  .main-banner-frame {
-    grid-template-columns: 1fr;  
-    row-gap: 30px;
-    padding: 40px 20px;     
-    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
-    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+/* ======================= <1000px ======================= */
+@media (max-width: 999.98px) {
+  .banner-center {
+    padding: 24px 16px 32px;
   }
-  .main-banner-txt {
-    padding: 0px 80px;          
-    align-self: start;          
-    justify-self: start;         
-    white-space: nowrap;
-    line-height: 0.4;
-padding-left: 100px;
-  }
-    .main-banner-txt .mb-txt1{font-size: 18px;}
-  .main-banner-txt .mb-txt2 { font-size: 35px; line-height: 1.1; }
-    .main-banner-txt .mb-txt3{font-size: 13px;}
 
-  .main-banner-img {
-    width: 300px;                 
-    max-width: 85vw;              
-    height: auto;                
-    justify-self: center;       
+  .banner-grid {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+  }
+
+  .main-banner-txt {
+    text-align: center;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: 1.2;
+  }
+  .mb-txt1 {
+    font-size: 16px;
+    color: #028587;
+    font-weight: 600;
+    margin: 0;
+  }
+  .mb-txt2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #000;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .mb-txt3 {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.25;
+    margin: 0;
   }
   .main-banner-img img {
-    width: 100%;
+    width: min(85vw, 360px);
     height: auto;
     object-fit: contain;
     display: block;
   }
 
-  /* 스와이퍼 버튼도 조금 안쪽/작게 */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
     width: 28px;
     height: 28px;
   }
-  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
-  .banner-inner :deep(.swiper-button-next) { right: 30px; }
-}
-
-@media (max-width: 490px) {
-  .main-banner-frame {
-    grid-template-columns: 1fr;  
-    row-gap: 30px;
-    padding: 40px 20px;     
-    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
-    text-align: left;             /* 텍스트는 왼쪽 정렬 */
+  :deep(.swiper-button-prev) {
+    left: 16px;
   }
-  .main-banner-txt {
-    padding: 0px 80px;          
-    align-self: start;          
-    justify-self: start;         
-    white-space: nowrap;
-    line-height: 0.4;
-padding-left: 60px;
+  :deep(.swiper-button-next) {
+    right: 16px;
   }
-    .main-banner-txt .mb-txt1{font-size: 18px;}
-  .main-banner-txt .mb-txt2 { font-size: 33px; line-height: 1.1; }
-    .main-banner-txt .mb-txt3{font-size: 13px;}
-
-  .main-banner-img {
-    width: 280px;                 
-    max-width: 85vw;              
-    height: auto;                
-    justify-self: center;       
-  }
-  .main-banner-img img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* 스와이퍼 버튼도 조금 안쪽/작게 */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
-    width: 28px;
-    height: 28px;
-  }
-  .banner-inner :deep(.swiper-button-prev) { left: 30px; }
-  .banner-inner :deep(.swiper-button-next) { right: 30px; }
-}
-
-@media (max-width: 430px) {
-  .main-banner-frame {
-    grid-template-columns: 1fr;  
-    row-gap: 30px;
-    padding: 40px 20px;     
-    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
-    text-align: left;             /* 텍스트는 왼쪽 정렬 */
-  }
-  .main-banner-txt {
-    padding: 0px 80px;          
-    align-self: start;          
-    justify-self: start;         
-    white-space: nowrap;
-    line-height: 0.4;
-padding-left: 45px;
-  }
-    .main-banner-txt .mb-txt1{font-size: 15px;}
-  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
-    .main-banner-txt .mb-txt3{font-size: 13px;}
-
-  .main-banner-img {
-    width: 280px;                 
-    max-width: 85vw;              
-    height: auto;                
-    justify-self: center;       
-  }
-  .main-banner-img img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* 스와이퍼 버튼도 조금 안쪽/작게 */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
-    width: 28px;
-    height: 28px;
-  }
-  .banner-inner :deep(.swiper-button-prev) { left: 18px; }
-  .banner-inner :deep(.swiper-button-next) { right: 18px; }
-}
-
-@media (max-width: 390px) {
-  .main-banner-frame {
-    grid-template-columns: 1fr;  
-    row-gap: 30px;
-    padding: 40px 20px;     
-    justify-items: stretch;       /* 텍스트 영역을 좌우로 쭉 */
-    text-align: left;             /* 텍스트는 왼쪽 정렬 */
-  }
-  .main-banner-txt {
-    padding: 0px 80px;          
-    align-self: start;          
-    justify-self: start;         
-    white-space: nowrap;
-    line-height: 0.4;
-padding-left: 45px;
-  }
-    .main-banner-txt .mb-txt1{font-size: 15px;}
-  .main-banner-txt .mb-txt2 { font-size: 30px; line-height: 1.1; }
-    .main-banner-txt .mb-txt3{font-size: 13px;}
-
-  .main-banner-img {
-    width: 270px;                 
-    max-width: 85vw;              
-    height: auto;                
-    justify-self: center;       
-  }
-  .main-banner-img img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* 스와이퍼 버튼도 조금 안쪽/작게 */
-  .banner-inner :deep(.swiper-button-prev),
-  .banner-inner :deep(.swiper-button-next) {
-    width: 28px;
-    height: 28px;
-  }
-  .banner-inner :deep(.swiper-button-prev) { left: 15px; }
-  .banner-inner :deep(.swiper-button-next) { right: 10px; }
 }
 </style>
