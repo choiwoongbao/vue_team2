@@ -1,23 +1,26 @@
 <template>
   <!-- ============임시. 지우고 작성하세요========================= -->
-  <div class="section-wrap">
+  <div class="section-wrap">``
     <div class="section-left">
       <h2>짐보따리 제공 서비스</h2>
       <p>짐보따리에서 다양한 서비스를 이용해 보세요</p>
     </div>
-
+    
     <div class="section-right">
       <div class="card">
         <h3>보관하기</h3>
         <p>짐이 많을 땐 잠시 맡기세요</p>
+        <img src="/public/images/mains/about/Group 405.png" alt="">
       </div>
       <div class="card">
         <h3>배송(집 → 지점)</h3>
         <p>무거운 짐은 문 앞에서 해결하세요</p>
+        <img src="/public/images/mains/about/Group 406.png" alt="">
       </div>
       <div class="card">
         <h3>배송(지점 → 집)</h3>
         <p>마지막까지 편하게 여행하세요</p>
+        <img src="/public/images/mains/about/image 466.png" alt="">
       </div>
     </div>
   </div>
