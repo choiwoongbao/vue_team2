@@ -1,4 +1,5 @@
 @use "./variables" as *;
+
 /*구글폰트 임포트 */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 * {
@@ -20,4 +21,8 @@ body {
   font-family: "Inter", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   color: #333; /* ✅ 모든 글자 색 */
   line-height: 1.6;
+}
+.inner{
+  max-width: 1320px;
+  margin: auto;
 }
