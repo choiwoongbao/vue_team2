@@ -3,8 +3,10 @@
 </script>
 
 <template>
-  <div >
-information2
+  <div>
+    <div class="inner">
+
+    </div>
   </div>
 </template>
 
